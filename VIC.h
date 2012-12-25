@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Arduino.h>
+#include "CPU_6502.h"
 
 class VIC
 {
@@ -13,6 +14,11 @@ public:
 	static void poke(byte addr, byte val);
 
 private:
+	static byte read_mmu(int addr);
+
+	static void accessMatrix();
+	static void accessGraphics();
+
 	/* colour palette */
 	enum colors {
 		BLACK,
@@ -38,7 +44,7 @@ private:
 	/* control register 1 */
 #define YSCROLL (_control[0] & 7)
 #define RSEL ((_control[0] & 8) >> 3)
-#define DEN((_control[0] & 0x10) >> 4)
+#define DEN ((_control[0] & 0x10) >> 4)
 #define BMM ((_control[0] & 0x20) >> 5)
 #define ECM ((_control[0] & 0x40) >> 6)
 #define RST8 ((_control[0] & 0x80) >> 7)
@@ -49,10 +55,10 @@ private:
 #define MCM ((_control[1] & 0x10) >> 4)
 #define RES ((_control[1] & 0x20) >> 5 )/* should always be 0! */
 
-	/* memory control register (mcr) */
+	/* memory control register (mcr) */ // vbase
 #define SEL_CHARSET (_mcr & 1)
-#define CB ((_mcr & 0xe) >> 1)
-#define VM ((_mcr & 0xf0) >> 4)
+#define CB ((_mcr & 0xe) >> 1)  // char base << 7
+#define VM ((_mcr & 0xf0) >> 4) // matrix base << 14
 
 	/* interrupt flag register (irr) */
 #define IRST (_irr & 1)
@@ -68,18 +74,12 @@ private:
 #define ELP ((_imr & 4) >> 3)
 
 	/* internal registers */
-	static int _scanLine;
-	static int _xCounter;
-	
-	static bool dmaLine;
-	static bool _dmaLinesEn;
-
 	static bool _displayState;
 
 	static int _vc,			/* video counter */
 			   _vcbase;		/* video counter base */
 	static int _rc;			/* row counter */
-	static int _vmli;		/* video matrix line idx */
+	//static int _vmli;		/* video matrix line idx */
 
 	/* mapped registers */
 	static byte _spPosX[8];
@@ -101,5 +101,21 @@ private:
 	static byte _bgColor[4];
 	static byte _sp[2];
 	static byte _spColor;
+
+	static int _rasterY;
+	static int _matrixBase;
+	static int _charBase;
+	static byte _colorMatrix[16];
+
+	static byte _dataGfx,
+				_dataChar,
+				_dataColor;
+
+	static int _lineIdx;
+	static byte _lineMatrix[40],
+				_lineColor[40];
+
+	static long _firstBaCycle;
+	static CPU_6502 *_cpu;
 };
 

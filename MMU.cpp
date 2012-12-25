@@ -1,6 +1,7 @@
 ﻿#include "MMU.h"
 #include "SRAM2.h"
 #include "CIA.h"
+#include "VIC.h"
 
 /*
 ==========

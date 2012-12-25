@@ -10,6 +10,11 @@ public:
 	void execIns();
 	void reset(unsigned int pc);
 
+	bool getBa();
+	void setBa(bool high);
+
+	long getCycle() { return _cycleCntr; }
+
 private:
 	unsigned int _regPC;
 	byte _regS;
@@ -77,5 +82,6 @@ private:
 	bool lineNMI;
 
 	int _state;
+	long _cycleCntr;
 };
 

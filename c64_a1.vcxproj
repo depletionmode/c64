@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{4B3F0FBF-BEC1-479F-B920-CAEE5F4200A6}</ProjectGuid>
+    <RootNamespace>c64_a1</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>C:\Users\davidkap\Documents\arduino-1.0.2\hardware\arduino\cores\arduino;C:\Users\davidkap\Documents\arduino-1.0.2\hardware\arduino\variants\eightanaloginputs;C:\Users\davidkap\Documents\arduino-1.0.2\libraries\Wire;C:\Users\davidkap\Documents\arduino-1.0.2\libraries\Wire\utility;C:\Users\davidkap\Documents\Arduino\libraries\SRAM2;C:\Users\davidkap\Documents\Arduino\libraries\SRAM2\utility;c:\users\davidkap\documents\arduino-1.0.2\hardware\tools\avr\avr\include\;c:\users\davidkap\documents\arduino-1.0.2\hardware\tools\avr\avr\include\avr\;c:\users\davidkap\documents\arduino-1.0.2\hardware\tools\avr\avr\;c:\users\davidkap\documents\arduino-1.0.2\hardware\tools\avr\lib\gcc\avr\4.3.2\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>C:\Users\davidkap\Documents\Arduino\c64_a1\Visual Micro\.c64_a1.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <PreprocessorDefinitions>ARDUINO=102;__AVR_ATmega328P__;F_CPU=16000000L;__AVR__;__cplusplus;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="CIA.h" />
+    <ClInclude Include="CPU_6502.h" />
+    <ClInclude Include="MMU.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="roms.h" />
+    <ClInclude Include="SRAM2.h" />
+    <ClInclude Include="VIC.h" />
+    <ClInclude Include="Visual Micro\.c64_a1.vsarduino.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CIA.cpp" />
+    <ClCompile Include="CPU_6502.cpp" />
+    <ClCompile Include="MMU.cpp" />
+    <ClCompile Include="SRAM2.cpp" />
+    <ClCompile Include="VIC.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="c64_a1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="c64_a1.ino">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="cpu_test.ino">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="rom_writer.ino">
+      <FileType>CppCode</FileType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties arduino.board.name="nano328" arduino.board.desc="Arduino Nano w/ ATmega328" arduino.board.property_bag="nano328.name=Arduino Nano w/ ATmega328&#xD;&#xA;nano328.upload.protocol=arduino&#xD;&#xA;nano328.upload.maximum_size=30720&#xD;&#xA;nano328.upload.speed=57600&#xD;&#xA;nano328.bootloader.low_fuses=0xFF&#xD;&#xA;nano328.bootloader.high_fuses=0xDA&#xD;&#xA;nano328.bootloader.extended_fuses=0x05&#xD;&#xA;nano328.bootloader.path=atmega&#xD;&#xA;nano328.bootloader.file=ATmegaBOOT_168_atmega328.hex&#xD;&#xA;nano328.bootloader.unlock_bits=0x3F&#xD;&#xA;nano328.bootloader.lock_bits=0x0F&#xD;&#xA;nano328.build.mcu=atmega328p&#xD;&#xA;nano328.build.f_cpu=16000000L&#xD;&#xA;nano328.build.core=arduino&#xD;&#xA;nano328.build.variant=eightanaloginputs&#xD;&#xA;" arduino.build.mcu="atmega328p" arduino.build.f_cpu="16000000L" arduino.build.core="arduino" arduino.upload.protocol="arduino" arduino.upload.speed="57600" arduino.upload.maximum_size="30720" arduino.upload.port="COM8" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

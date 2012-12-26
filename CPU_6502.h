@@ -23,9 +23,6 @@ private:
 	byte _regX;
 	byte _regY;
 
-	byte _rom_dev;
-	byte _ram_dev;
-
 	void jump_branch(int offset);
 	void ins_ADC(byte value);
 	void stack_push(byte val);

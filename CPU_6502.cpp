@@ -188,6 +188,7 @@ void CPU_6502::reset(unsigned int pc) {
   _regPC = pc;
 
   _state = 0;
+  _cycleCntr = 0;
 }
 
 void CPU_6502::execIns() {
@@ -940,10 +941,28 @@ void CPU_6502::execIns() {
     /*** STY END ***/
       
     default:
-    _dbg("Unknown ins!");
+		_dbg("Unknown ins!");
+		Serial.println("CPU Error: Illegal instruction!");
+		Serial.print("pc = $");Serial.println(_regPC, HEX);
+		Serial.print("sp = $");Serial.println(_regPC, HEX);
+		Serial.print("p = $");Serial.print(_regPC, HEX);Serial.print(' ');
+		Serial.print(IS_N ? 'N' : '-');
+		Serial.print(IS_V ? 'V' : '-');
+		Serial.print('*');
+		Serial.print(IS_B ? 'B' : '-');
+		Serial.print(IS_D ? 'D' : '-');
+		Serial.print(IS_I ? 'I' : '-');
+		Serial.print(IS_Z ? 'Z' : '-');
+		Serial.println(IS_C ? 'C' : '-');
+		Serial.println("a = $");Serial.println(_regA, HEX);
+		Serial.println("x = $");Serial.println(_regX, HEX);
+		Serial.println("y = $");Serial.println(_regY, HEX);
+		Serial.println("<execution halted>");
+		while (1);
   }
+
+  _cycleCntr++;
 }
 
-//CPU_6502::CPU_6502(byte rom_dev, byte ram_dev) {
 CPU_6502::CPU_6502() {
 }

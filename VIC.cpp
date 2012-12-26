@@ -4,6 +4,91 @@
 void VIC::init(CPU_6502 *cpu)
 {
 	_cpu = cpu;
+
+	_cycle = 1;
+}
+
+void VIC::exec()
+{
+	switch (_cycle) {
+	case 1:
+		break;
+	case 2:
+		break;
+	case 12:
+		break;
+	case 13:
+		break;
+	case 14:
+		break;
+	case 15:
+		break;
+	case 16:
+		break;
+	case 17:
+		break;
+	case 18:
+		break;
+	case 19:
+	case 20:
+	case 21:
+	case 22:
+	case 23:
+	case 24:
+	case 25:
+	case 26:
+	case 27:
+	case 28:
+	case 29:
+	case 30:
+	case 31:
+	case 32:
+	case 33:
+	case 34:
+	case 35:
+	case 36:
+	case 37:
+	case 38:
+	case 39:
+	case 40:
+	case 41:
+	case 42:
+	case 43:
+	case 44:
+	case 45:
+	case 46:
+	case 47:
+	case 48:
+	case 49:
+	case 50:
+	case 51:
+	case 52:
+	case 53:
+	case 54:
+		break;
+	case 55:
+		break;
+	case 56:
+		break;
+	case 57:
+		break;
+	case 58:
+		break;
+	case 59:
+		break;
+	case 60:
+		break;
+	case 61:
+		break;
+	case 62:
+		break;
+	case 63:
+		_cycle = 1;
+		break;
+	}
+
+	_rasterX += 8;
+	_cycle++;
 }
 
 byte VIC::peek(byte addr)
@@ -120,6 +205,7 @@ byte VIC::_bgColor[4];
 byte VIC::_sp[2];
 byte VIC::_spColor;
 
+int VIC::_rasterX;
 int VIC::_rasterY;
 int VIC::_matrixBase;
 int VIC::_charBase;
@@ -133,5 +219,7 @@ int VIC::_lineIdx;
 byte VIC::_lineMatrix[40],
 		  _lineColor[40];
 
-long _firstBaCycle;
-CPU_6502 *_cpu;
+long VIC::_firstBaCycle;
+CPU_6502 *VIC::_cpu;
+
+byte VIC::_cycle;

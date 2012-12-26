@@ -101,7 +101,8 @@ private:
 	static byte _bgColor[4];
 	static byte _sp[2];
 	static byte _spColor;
-
+	
+	static int _rasterX;
 	static int _rasterY;
 	static int _matrixBase;
 	static int _charBase;
@@ -117,5 +118,7 @@ private:
 
 	static long _firstBaCycle;
 	static CPU_6502 *_cpu;
+
+	static byte _cycle;
 };
 

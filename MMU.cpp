@@ -205,7 +205,7 @@ char MMU::read(unsigned int addr)
 	case 0xe:
 	case 0xf:
 			__log("KERNAL ROM\n");
-			// DEBUG
+			// DEBUG reads from $0000 instead of from $1000 which is where the kernel is...
 			val = readRom(addr - 0xe000);
 			//val = readRom(addr - 0xd000);
 		break;

@@ -198,13 +198,14 @@ void CPU_6502::execIns() {
   switch(opcode) {
     /*** ADC ***/
     case 0x61:    _dbg("ADC INDX");
-      zp = (fetch() | _regX) & 0xff;
+      zp = fetch() + _regX;
       addr = MMU::read(zp) + (MMU::read(zp + 1) << 8);
       ins_ADC(MMU::read(addr));
       break;
     case 0x65:    _dbg("ADC ZP");
-      ins_ADC(MMU::read(fetch()));
-      break;
+		zp = fetch();
+		ins_ADC(MMU::read(zp));
+		break;
     case 0x69:    _dbg("ADC IMM");
       ins_ADC(fetch());
       break;
@@ -214,14 +215,14 @@ void CPU_6502::execIns() {
       break;
     case 0x71:    _dbg("ADC INDY");
       zp = fetch();
-      addr = MMU::read(zp) + (MMU::read(zp + 1) << 8) + _regY;
+      addr = (MMU::read(zp) | MMU::read(zp + 1) << 8) + _regY;
       ins_ADC(MMU::read(addr));
       break;
     case 0x75:    _dbg("ADC ZPX");
-      addr = (fetch() | _regX) & 0xff;
-      val = MMU::read(addr);
-      ins_ADC(val);
-      break;
+		zp = fetch() + _regX;
+		val = MMU::read(zp);
+		ins_ADC(val);
+		break;
     case 0x79:    _dbg("ADC ABSY");
       addr = (fetch() | fetch() << 8) + _regY;
       ins_ADC(MMU::read(addr));
@@ -234,7 +235,7 @@ void CPU_6502::execIns() {
 
     /*** AND ***/
     case 0x21:    _dbg("AND INDX");
-      zp = fetch() | _regX;
+      zp = fetch() + _regX;
       addr = MMU::read(zp) + (MMU::read(zp + 1) << 8);
       ins_AND(MMU::read(addr));
       break;
@@ -254,7 +255,7 @@ void CPU_6502::execIns() {
       ins_ADC(MMU::read(addr));
       break;
     case 0x35:    _dbg("AND ZPX");
-      zp = fetch() | _regX;
+      zp = fetch() + _regX;
       ins_AND(MMU::read(zp));
       break;
     case 0x39:    _dbg("AND ABSY");
@@ -278,7 +279,7 @@ void CPU_6502::execIns() {
 		ins_ASL(&_regA);
 		break;
     case 0x16:    _dbg("ASL ZPX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		val = MMU::read(zp);
 		ins_ASL(&val);
 		MMU::write(zp, val);
@@ -357,7 +358,7 @@ void CPU_6502::execIns() {
     
     /*** CMP ***/
     case 0xc1:    _dbg("CMP INDX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		addr = MMU::read(zp) + (MMU::read(zp+1) << 8);
 		ins_CMP(_regA, MMU::read(addr));
 		break;
@@ -378,7 +379,7 @@ void CPU_6502::execIns() {
 		ins_CMP(_regA, MMU::read(addr));
 		break;
     case 0xd5:    _dbg("CMP ZPX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		ins_CMP(_regA, MMU::read(zp));
 		break;
     case 0xd9:    _dbg("CMP ABSY");
@@ -428,7 +429,7 @@ void CPU_6502::execIns() {
       ins_DEC(addr);
       break;
     case 0xd6:    _dbg("DEC ZPX");
-      zp = fetch() | _regX;
+      zp = fetch() + _regX;
       ins_DEC(zp);
       break;
     case 0xde:    _dbg("DEC ABSX");
@@ -439,7 +440,7 @@ void CPU_6502::execIns() {
     
     /*** EOR ***/
     case 0x41:    _dbg("EOR INDX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		addr = MMU::read(zp) | MMU::read(zp+1) << 8;
 		ins_EOR(MMU::read(addr));
 		break;
@@ -460,7 +461,7 @@ void CPU_6502::execIns() {
       ins_EOR(MMU::read(addr));
       break;
     case 0x55:    _dbg("EOR ZPX");
-      zp = fetch() | _regX;
+      zp = fetch() + _regX;
       ins_EOR(MMU::read(zp));
       break;
     case 0x59:    _dbg("EOR ABSY");
@@ -507,7 +508,7 @@ void CPU_6502::execIns() {
 		ins_INC(addr);
 		break;
     case 0xf6:    _dbg("INC ZPX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		ins_INC(zp);
 		break;
     case 0xfe:    _dbg("INC ABSX");
@@ -538,7 +539,7 @@ void CPU_6502::execIns() {
     
     /*** LDA ***/
     case 0xa1:    _dbg("LDA INDX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		addr = MMU::read(zp) + MMU::read(zp + 1) << 8;
 		ins_LD_(&_regA, addr);
 		break;
@@ -561,7 +562,7 @@ void CPU_6502::execIns() {
 		ins_LD_(&_regA, addr);
 		break;
     case 0xb5:    _dbg("LDA ZPX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		ins_LD_(&_regA, zp);
 		break;
     case 0xb9:    _dbg("LDA ABSY");
@@ -609,7 +610,7 @@ void CPU_6502::execIns() {
 		ins_LD_(&_regY, zp);
 		break;
     case 0xb4:    _dbg("LDY ZPX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		ins_LD_(&_regY, zp);
 		break;
     case 0xac:    _dbg("LDY ABS");
@@ -633,7 +634,7 @@ void CPU_6502::execIns() {
 		ins_LSR(&_regA);
 		break;
     case 0x56:    _dbg("LSR ZPX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		val = MMU::read(zp);
 		ins_LSR(&val);
 		MMU::write(zp, val);
@@ -659,7 +660,7 @@ void CPU_6502::execIns() {
     
     /*** ORA ***/
     case 0x01:    _dbg("ORA INDX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		addr = MMU::read(zp) | MMU::read(zp + 1) << 8;
 		ins_ORA(MMU::read(addr));
 		break;
@@ -680,7 +681,7 @@ void CPU_6502::execIns() {
 		ins_ORA(MMU::read(addr));
 		break;
     case 0x15:    _dbg("ORA ZPX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		ins_ORA(MMU::read(zp));
 		break;
     case 0x19:    _dbg("ORA ABSY");
@@ -753,7 +754,7 @@ void CPU_6502::execIns() {
 		MMU::write(addr, val);
 		break;
     case 0x36:    _dbg("ROL ZPX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		val = MMU::read(zp);
 		ins_ROL(&val);
 		MMU::write(zp, val);
@@ -783,7 +784,7 @@ void CPU_6502::execIns() {
 		MMU::write(addr, val);
 		break;
     case 0x76:    _dbg("ROR ZPX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		val = MMU::read(zp);
 		ins_ROR(&val);
 		MMU::write(zp, val);
@@ -811,7 +812,7 @@ void CPU_6502::execIns() {
     
     /*** SBC ***/
     case 0xe1:    _dbg("SBC INDX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		addr = MMU::read(zp) + MMU::read(zp + 1) << 8;
 		val = MMU::read(addr);
 		ins_SBC(val);
@@ -834,7 +835,7 @@ void CPU_6502::execIns() {
 		ins_SBC(val);
 		break;
     case 0xf5:    _dbg("SBC ZPX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		val = MMU::read(zp);
 		ins_SBC(val);
 		break;
@@ -852,7 +853,7 @@ void CPU_6502::execIns() {
     
     /*** STA ***/
     case 0x81:    _dbg("STA INDX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		addr = MMU::read(zp) | MMU::read(zp + 1) << 8;
 		MMU::write(addr, _regA);
 		break;
@@ -870,7 +871,7 @@ void CPU_6502::execIns() {
 		MMU::write(addr, _regA);
 		break;
     case 0x95:    _dbg("STA ZPX");
-		zp = fetch() | _regX;
+		zp = fetch() + _regX;
 		MMU::write(zp, _regA);
 		break;
     case 0x99:    _dbg("STA ABSY");

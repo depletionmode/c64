@@ -45,6 +45,7 @@ extern "C" void __cxa_pure_virtual() {}
 #include "C:\Users\davidkap\Documents\Arduino\c64_a1\VIC.cpp"
 #include "C:\Users\davidkap\Documents\Arduino\c64_a1\VIC.h"
 #include "C:\Users\davidkap\Documents\Arduino\c64_a1\cpu_test.ino"
+#include "C:\Users\davidkap\Documents\Arduino\c64_a1\cpu_tests.h"
 #include "C:\Users\davidkap\Documents\Arduino\c64_a1\resource.h"
 #include "C:\Users\davidkap\Documents\Arduino\c64_a1\rom_writer.ino"
 #include "C:\Users\davidkap\Documents\Arduino\c64_a1\roms.h"

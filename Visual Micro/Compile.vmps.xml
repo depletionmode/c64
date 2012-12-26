@@ -1,6 +1,6 @@
 <VisualMicro>
   <Program Name="c64_a1" Ext=".ino" Location="C:\Users\davidkap\Documents\Arduino\c64_a1">
-    <Compile IsCompiled="0" ConfigurationName="Debug" StopOnError="False" OptimiseLibs="True" OptimiseCore="True" BuildPath="C:\Users\davidkap\AppData\Local\VMicro\Arduino\Builds\c64_a1\nano328" IncludeDebug="0" IncludesDebug="0" SketchName="c64_a1" CompilerErrors="1" />
+    <Compile CompilerErrors="0" ConfigurationName="Debug" StopOnError="False" OptimiseLibs="True" OptimiseCore="True" BuildPath="C:\Users\davidkap\AppData\Local\VMicro\Arduino\Builds\c64_a1\nano328" IncludeDebug="0" IncludesDebug="0" SketchName="c64_a1" IsCompiled="1" />
     <Platform Name="Arduino">
       <Board CoreFolder="C:\Users\davidkap\Documents\arduino-1.0.2\hardware\arduino\cores\arduino" Name="nano328" Description="Arduino Nano w/ ATmega328" VariantFullPath="C:\Users\davidkap\Documents\arduino-1.0.2\hardware\arduino\variants\eightanaloginputs" />
     </Platform>

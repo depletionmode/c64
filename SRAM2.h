@@ -1,5 +1,5 @@
 #pragma once
-
+/* shamelessly stolen from somewhere */
 #include <Arduino.h>
 
 #define setupSPI SPCR = 0x50 //Master mode, MSB first, SCK phase low, SCK idle low, clock/4

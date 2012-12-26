@@ -68,6 +68,7 @@
   <ItemGroup>
     <ClInclude Include="CIA.h" />
     <ClInclude Include="CPU_6502.h" />
+    <ClInclude Include="cpu_tests.h" />
     <ClInclude Include="MMU.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="roms.h" />

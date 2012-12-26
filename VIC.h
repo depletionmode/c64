@@ -6,7 +6,7 @@
 class VIC
 {
 public:
-	static void init();
+	static void init(CPU_6502 *cpu);
 	static void exec();
 	
 	/* addr in range $00 - $2e */

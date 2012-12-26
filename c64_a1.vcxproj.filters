@@ -39,6 +39,9 @@
     <ClInclude Include="VIC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cpu_tests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CPU_6502.cpp">

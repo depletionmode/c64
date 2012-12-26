@@ -1,9 +1,9 @@
 #include "VIC.h"
 #include "MMU.h"
 
-void VIC::init()
+void VIC::init(CPU_6502 *cpu)
 {
-
+	_cpu = cpu;
 }
 
 byte VIC::peek(byte addr)
